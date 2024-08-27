@@ -15,7 +15,6 @@ User.sync()
     }
 )
 */
-//app.use( '/', express.static('./build/') )
 app.use('/api', express.json());
 /*
 app.use(
@@ -52,7 +51,10 @@ app.use(
 )
 */
 app.get('/', (req, res) => {
-    res.render('./build/index.html');
+    res.sendFile('./build/index.html', { root: '.' });
+});
+app.get('/_app/*', (req, res) => {
+    res.sendFile(`./build/${req.url}`, { root: '.' });
 });
 /*
 app.get('/api', (req, res) => {
