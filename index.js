@@ -1,16 +1,21 @@
-import express from 'express';
-import { env } from 'process';
-import Bcrypt from 'bcryptjs';
-import JWT from 'jsonwebtoken';
-import User from './models/user.mjs';
-import EnvironmentData from './models/environment-data.mjs';
-const app = express();
-User.sync()
+"use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+const express_1 = __importDefault(require("express"));
+const process_1 = require("process");
+const bcryptjs_1 = __importDefault(require("bcryptjs"));
+const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
+const user_mjs_1 = __importDefault(require("./models/user.mjs"));
+const environment_data_mjs_1 = __importDefault(require("./models/environment-data.mjs"));
+const app = (0, express_1.default)();
+user_mjs_1.default.sync()
     .then(() => {
-    EnvironmentData.sync();
+    environment_data_mjs_1.default.sync();
 });
-app.use('/', express.static('../cetta-svelte/build/'));
-app.use('/api', express.json());
+app.use('/', express_1.default.static('../cetta-svelte/build/'));
+app.use('/api', express_1.default.json());
 app.use([
     '/api/create',
     '/api/update',
@@ -24,7 +29,7 @@ app.use([
     const authorization = req.headers.authorization;
     const token = authorization.substring(String('Bearer ').length);
     try {
-        const payload = JWT.verify(token, env['SECRET_KEY']);
+        const payload = jsonwebtoken_1.default.verify(token, process_1.env['SECRET_KEY']);
         req.user_id = payload.user_id;
         next();
     }
@@ -34,7 +39,7 @@ app.use([
     }
 });
 app.get('/api', (req, res) => {
-    EnvironmentData.findAll()
+    environment_data_mjs_1.default.findAll()
         .then((value) => {
         res.json(value.reduce((data, item) => {
             data[item.unit] = (data[item.unit] || []).concat([item]);
@@ -49,7 +54,7 @@ app.get('/api', (req, res) => {
 });
 app.post('/api/login', (req, res) => {
     const { username, password } = req.body;
-    User.findOne({
+    user_mjs_1.default.findOne({
         where: {
             username: username
         }
@@ -60,13 +65,13 @@ app.post('/api/login', (req, res) => {
         };
         if (!value)
             return res.writeHead(401).end(JSON.stringify(message401));
-        Bcrypt.compare(value.password, password, (e) => {
+        bcryptjs_1.default.compare(value.password, password, (e) => {
             if (e)
                 return res.writeHead(401).end(JSON.stringify(message401));
-            const accessToken = JWT.sign({
+            const accessToken = jsonwebtoken_1.default.sign({
                 user_id: value.id,
                 username: value.username
-            }, env['SECRET_KEY'], {
+            }, process_1.env['SECRET_KEY'], {
                 expiresIn: 1800
             });
             res.json({
@@ -83,7 +88,7 @@ app.post('/api/login', (req, res) => {
     });
 });
 app.put('/api/create', (req, res) => {
-    EnvironmentData.create({
+    environment_data_mjs_1.default.create({
         place: req.body.place,
         unit: req.body.unit,
         value: req.body.value,
@@ -99,7 +104,7 @@ app.put('/api/create', (req, res) => {
     });
 });
 app.patch('/api/update', (req, res) => {
-    EnvironmentData.update({
+    environment_data_mjs_1.default.update({
         place: req.body.place,
         unit: req.body.unit,
         value: req.body.value,
@@ -119,7 +124,7 @@ app.patch('/api/update', (req, res) => {
     });
 });
 app.delete('/api/delete', (req, res) => {
-    EnvironmentData.destroy({
+    environment_data_mjs_1.default.destroy({
         where: {
             id: req.body.environment_data_id
         }
@@ -133,6 +138,6 @@ app.delete('/api/delete', (req, res) => {
         }));
     });
 });
-app.listen(env['PORT'], () => {
-    console.log(`Listening on ${env['PORT']}`);
+app.listen(process_1.env['PORT'], () => {
+    console.log(`Listening on ${process_1.env['PORT']}`);
 });
