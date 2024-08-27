@@ -193,5 +193,5 @@ app.delete('/api/delete', (req: any, res: any) => {
 })
 */
 app.listen(3000, () => {
-    console.log( `Listening on 3000}` )
+    console.log( `Listening on 3000` )
 })
