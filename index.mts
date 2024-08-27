@@ -74,31 +74,6 @@ app.get('/_app/*', (req, res) => {
 })
 
 app.get('/api', (req, res) => {
-    User.sync()
-    .then(
-        () => {
-            EnvironmentData.sync()
-    
-            Bcrypt.hash(
-                'pass',
-                8,
-                (e, hash) => {
-                    User.findOrCreate(
-                        {
-                            where: {
-                                username: 'admin'
-                            },
-                            defaults: {
-                                password: hash
-                            }
-                        }
-                    )
-                }
-            )
-        }
-    )
-    
-    
     EnvironmentData.findAll()
     .then(
         (value) => {

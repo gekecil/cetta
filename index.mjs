@@ -48,20 +48,6 @@ app.get('/_app/*', (req, res) => {
     res.sendFile(`build/${req.url}`, { root: '.' });
 });
 app.get('/api', (req, res) => {
-    User.sync()
-        .then(() => {
-        EnvironmentData.sync();
-        Bcrypt.hash('pass', 8, (e, hash) => {
-            User.findOrCreate({
-                where: {
-                    username: 'admin'
-                },
-                defaults: {
-                    password: hash
-                }
-            });
-        });
-    });
     EnvironmentData.findAll()
         .then((value) => {
         res.json(value.reduce((data, item) => {
