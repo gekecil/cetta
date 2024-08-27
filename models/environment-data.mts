@@ -8,7 +8,8 @@ const sequelize = new Sequelize({
     host: 'ep-icy-king-a4vexl6b.us-east-1.aws.neon.tech',
     username: 'default',
     password: 'aylR8JFSL3mC',
-    database: 'verceldb'
+    database: 'verceldb',
+    ssl: true
 })
 
 class EnvironmentData extends Model {
