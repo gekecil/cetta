@@ -1,24 +1,11 @@
 const express = require('express')
-const { env } = require('process')
-const Bcrypt = require('bcryptjs')
-const JWT = require('jsonwebtoken')
-const { JwtPayload } = require('jsonwebtoken')
-const User = require('./models/user.js')
-const EnvironmentData = require('./models/environment-data.js')
 
 const app = express()
 
-User.sync()
-.then(
-    () => {
-        EnvironmentData.sync()
-    }
-)
-
-app.use( '/', express.static('../cetta-svelte/build/') )
+app.use( '/', express.static('./build/') )
 
 app.use( '/api', express.json() )
-
+/*
 app.use(
     [
         '/api/create',
@@ -204,7 +191,7 @@ app.delete('/api/delete', (req: any, res: any) => {
         }
     )
 })
-
-app.listen(env['PORT'], () => {
-    console.log( `Listening on ${env['PORT']}` )
+*/
+app.listen(3000, () => {
+    console.log( `Listening on 3000}` )
 })
