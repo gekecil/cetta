@@ -7,8 +7,8 @@ const express_1 = __importDefault(require("express"));
 const process_1 = require("process");
 const bcryptjs_1 = __importDefault(require("bcryptjs"));
 const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
-const user_mjs_1 = __importDefault(require("./models/user.js"));
-const environment_data_mjs_1 = __importDefault(require("./models/environment-data.js"));
+const user_mjs_1 = __importDefault(require("./models/user.mjs"));
+const environment_data_mjs_1 = __importDefault(require("./models/environment-data.mjs"));
 const app = (0, express_1.default)();
 user_mjs_1.default.sync()
     .then(() => {

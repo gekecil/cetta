@@ -3,9 +3,9 @@ import { Sequelize, DataTypes, Model } from 'sequelize'
 
 const sequelize = new Sequelize({
     dialect: 'postgres',
-    username: env['DB_USERNAME'],
-    password: env['DB_PASSWORD'],
-    database: env['DB_DATABASENAME']
+    username: 'default',
+    password: 'aylR8JFSL3mC',
+    database: 'verceldb'
 })
 
 class User extends Model {

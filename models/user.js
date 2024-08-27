@@ -1,12 +1,11 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-const process_1 = require("process");
 const sequelize_1 = require("sequelize");
 const sequelize = new sequelize_1.Sequelize({
     dialect: 'postgres',
-    username: process_1.env['DB_USERNAME'],
-    password: process_1.env['DB_PASSWORD'],
-    database: process_1.env['DB_DATABASENAME']
+    username: 'default',
+    password: 'aylR8JFSL3mC',
+    database: 'verceldb'
 });
 class User extends sequelize_1.Model {
 }
