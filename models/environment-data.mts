@@ -5,6 +5,7 @@ import User from './user.mjs'
 const sequelize = new Sequelize({
     dialect: 'postgres',
     dialectModule: pg,
+    host: 'ep-icy-king-a4vexl6b.us-east-1.aws.neon.tech',
     username: 'default',
     password: 'aylR8JFSL3mC',
     database: 'verceldb'
