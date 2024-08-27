@@ -18,6 +18,14 @@ User.sync()
 app.use( '/', express.static('./build/') )
 
 app.use( '/api', express.json() )
+
+
+app.get('/api', (req, res) => {
+    res.json({
+        status: 1
+    })
+})
+
 /*
 app.use(
     [
