@@ -50,6 +50,11 @@ app.get('/_app/*', (req, res) => {
 app.get('/api', (req, res) => {
     EnvironmentData.findAll()
         .then((value) => {
+        var _a;
+        if (value.length) {
+            const updatedAt = (_a = value.sort((a, b) => Date.parse(a.updated_at) - Date.parse(b.updated_at)).at(value.length - 1)) === null || _a === void 0 ? void 0 : _a.updated_at;
+            res.setHeader('Last-Modified', (new Date(updatedAt)).toUTCString());
+        }
         res.json(value.reduce((data, item) => {
             data[item.unit] = (data[item.unit] || []).concat([item]);
             return data;
