@@ -9,7 +9,13 @@ const sequelize = new Sequelize({
     username: 'default',
     password: 'aylR8JFSL3mC',
     database: 'verceldb',
-    ssl: true
+
+    dialectOptions: {
+        ssl: {
+            require: true,
+            rejectUnauthorized: false
+        }
+     },
 })
 
 class EnvironmentData extends Model {
