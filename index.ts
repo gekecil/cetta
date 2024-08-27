@@ -5,6 +5,13 @@ const app = express()
 app.use( '/', express.static('./build/') )
 
 app.use( '/api', express.json() )
+
+
+app.get('/api', (req: any, res: any) => {
+    res.json({})
+})
+
+
 /*
 app.use(
     [

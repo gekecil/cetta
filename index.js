@@ -4,6 +4,9 @@ const express = require('express');
 const app = express();
 app.use('/', express.static('./build/'));
 app.use('/api', express.json());
+app.get('/api', (req, res) => {
+    res.json({});
+});
 /*
 app.use(
     [
@@ -192,5 +195,5 @@ app.delete('/api/delete', (req: any, res: any) => {
 })
 */
 app.listen(3000, () => {
-    console.log(`Listening on 3000}`);
+    console.log(`Listening on 3000`);
 });
