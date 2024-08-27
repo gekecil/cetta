@@ -1,24 +1,20 @@
 import express from 'express'
-/*
-import { env } from 'process'
 import Bcrypt from 'bcryptjs'
 import JWT, { JwtPayload } from 'jsonwebtoken'
 import User from './models/user.mjs'
 import EnvironmentData from './models/environment-data.mjs'
-*/
+
 const app = express()
-/*
+
 User.sync()
 .then(
     () => {
         EnvironmentData.sync()
     }
 )
-*/
 
 app.use( '/api', express.json() )
 
-/*
 app.use(
     [
         '/api/create',
@@ -36,7 +32,7 @@ app.use(
         const token = authorization.substring( String('Bearer ').length )
 
         try {
-            const payload = JWT.verify( token, env['SECRET_KEY'] as string ) as JwtPayload
+            const payload = JWT.verify( token, 'secret' ) as JwtPayload
 
             req.user_id = payload.user_id
 
@@ -51,7 +47,7 @@ app.use(
 
     }
 )
-*/
+
 app.get('/', (req, res) => {
     res.sendFile('build/index.html', {root: '.'})
 })
@@ -60,13 +56,6 @@ app.get('/_app/*', (req, res) => {
     res.sendFile(`build/${req.url}`, {root: '.'})
 })
 
-app.get('/api', (req, res) => {
-    res.json({
-        status: -1
-    })
-})
-
-/*
 app.get('/api', (req, res) => {
     EnvironmentData.findAll()
     .then(
@@ -120,7 +109,7 @@ app.post('/api/login', (req, res) => {
                             user_id: value.id,
                             username: value.username
                         },
-                        env['SECRET_KEY'] as string,
+                        'secret',
                         {
                             expiresIn: 1800
                         }
@@ -219,5 +208,5 @@ app.delete('/api/delete', (req: any, res) => {
         }
     )
 })
-*/
+
 app.listen(3000)
