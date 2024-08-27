@@ -1,7 +1,9 @@
+import pg from 'pg';
 import { Sequelize, DataTypes, Model } from 'sequelize';
 import User from './user.mjs';
 const sequelize = new Sequelize({
     dialect: 'postgres',
+    dialectModule: pg,
     username: 'default',
     password: 'aylR8JFSL3mC',
     database: 'verceldb'
