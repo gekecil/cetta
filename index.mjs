@@ -15,13 +15,8 @@ User.sync()
     }
 )
 */
-app.use('/', express.static('./build/'));
+//app.use( '/', express.static('./build/') )
 app.use('/api', express.json());
-app.get('/api', (req, res) => {
-    res.json({
-        status: 1
-    });
-});
 /*
 app.use(
     [
@@ -55,7 +50,11 @@ app.use(
 
     }
 )
-
+*/
+app.get('/', (req, res) => {
+    res.render('./build/index.html');
+});
+/*
 app.get('/api', (req, res) => {
     EnvironmentData.findAll()
     .then(
