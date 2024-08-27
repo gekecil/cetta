@@ -7,6 +7,16 @@ const app = express();
 User.sync()
     .then(() => {
     EnvironmentData.sync();
+    Bcrypt.hash('pass', 8, (e, hash) => {
+        User.findOrCreate({
+            where: {
+                username: 'admin'
+            },
+            defaults: {
+                password: hash
+            }
+        });
+    });
 });
 app.use('/api', express.json());
 app.use([

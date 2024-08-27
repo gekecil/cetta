@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/hery-ae/cetta-environment-data#readme",
   "dependencies": {
+    "@sequelize/postgres": "^7.0.0-alpha.41",
     "bcryptjs": "^2.4.3",
     "express": "^4.19.2",
     "jsonwebtoken": "^9.0.2",
