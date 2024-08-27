@@ -53,11 +53,17 @@ app.use(
 )
 */
 app.get('/', (req, res) => {
-    res.sendFile('./build/index.html', {root: '.'})
+    res.sendFile('build/index.html', {root: '.'})
 })
 
 app.get('/_app/*', (req, res) => {
-    res.sendFile(`./build/${req.url}`, {root: '.'})
+    res.sendFile(`build/${req.url}`, {root: '.'})
+})
+
+app.get('/api', (req, res) => {
+    res.json({
+        status: -1
+    })
 })
 
 /*
