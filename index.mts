@@ -1,23 +1,24 @@
 import express from 'express'
+/*
 import { env } from 'process'
 import Bcrypt from 'bcryptjs'
 import JWT, { JwtPayload } from 'jsonwebtoken'
 import User from './models/user.mjs'
 import EnvironmentData from './models/environment-data.mjs'
-
+*/
 const app = express()
-
+/*
 User.sync()
 .then(
     () => {
         EnvironmentData.sync()
     }
 )
-
-app.use( '/', express.static('../cetta-svelte/build/') )
+*/
+app.use( '/', express.static('./build/') )
 
 app.use( '/api', express.json() )
-
+/*
 app.use(
     [
         '/api/create',
@@ -203,7 +204,5 @@ app.delete('/api/delete', (req: any, res) => {
         }
     )
 })
-
-app.listen(env['PORT'], () => {
-    console.log( `Listening on ${env['PORT']}` )
-})
+*/
+app.listen(3000)
